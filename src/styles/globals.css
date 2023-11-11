@@ -15,3 +15,10 @@ body {
    opacity: 0.25;
    z-index: 0;
 } */
+
+/* backgroundImage: {
+        'hero-pattern': "url('/img/hero-pattern.svg')",
+        'footer-texture': "url('/img/footer-texture.png')",
+      } */
+
+/* <div class="bg-[url('/img/hero-pattern.svg')]"> */

@@ -17,7 +17,7 @@ const Header = () => {
    ];
 
    return (
-      <main className="w-full flex justify-between  items-center fixed top-0  bg-opacity-10 backdrop-blur-md shadow-md h-16 z-20">
+      <main className="w-full flex justify-between  items-center fixed top-0  bg-opacity-10 backdrop-blur-md shadow-lg h-16 z-20">
          <div className="flex w-full p-4 justify-between items-center  shadow-custom">
             <div className=" pr-2">
                <img src="/monie.jpg" alt="logo-image" className="h-12 w-10" />

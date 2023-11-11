@@ -258,7 +258,7 @@ export const StakingContextProvider = ({ children }) => {
          // const formattedAmount = ethers.utils.formatEther(_amount);
          // console.log(formattedAmount);
 
-         const tx = await contract.stake(_amount, {
+         const tx = await contract.stake(_amount, address, {
             gasLimit: 300000,
             gasPrice: ethers.utils.parseUnits('10.0', 'gwei'),
          });
