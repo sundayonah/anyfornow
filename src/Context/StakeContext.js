@@ -223,7 +223,7 @@ export const StakingContextProvider = ({ children }) => {
          return;
       }
 
-      const _amount = ethers.utils.parseEther(totalAmountStake, 'ether');
+      const _amount = ethers.utils.parseEther(stakeAmount, 'ether');
 
       const stringAmount = _amount.toString();
 
