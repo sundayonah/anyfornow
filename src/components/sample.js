@@ -2,9 +2,9 @@ import React from 'react';
 
 const MainPage = () => {
    return (
-      <main className="w-[70%] md:w-[85%] flex flex-col md:flex-row lg:w-[80%] justify-between items-center space-y-4 md:space-y-0 md:space-x-9 m-auto mt-10 mb-10">
+      <main className="w-[80%] flex justify-between items-center space-x-9 m-auto mt-10 ">
          {/* left side */}
-         <div className="w-full ">
+         <div className="w-[80%] ">
             <span>Stats</span>
             <div className="p-9 border border-gray-500 rounded-md ">
                <h2>12,234 ANC = $10.03M</h2>
@@ -63,12 +63,12 @@ const MainPage = () => {
             </div>
          </div>
          {/* right side */}
-         <div className="w-full px-8">
-            <div className=" flex justify-center items-center py-7  ">
-               <button className="bg-transparent border border-gray-600 px-8 md:px-16 p-2">
+         <div className="w-[80%] px-8">
+            <div className="flex justify-center items-center py-7 ">
+               <button className="bg-transparent border border-gray-600 px-16 p-2">
                   Stake
                </button>
-               <button className="bg-gray-500 border border-gray-600 px-8 md:px-16 p-2">
+               <button className="bg-gray-500 border border-gray-600 px-16 p-2">
                   unStake
                </button>
             </div>
