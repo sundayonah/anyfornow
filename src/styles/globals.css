@@ -2,29 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-} */
-
 body {
    color: #fff;
-   background: #061042;
+   background: linear-gradient(to right, #000f58, #000624);
 }
-
-/* <div class="h-14 bg-gradient-to-r from-sky-500 to-indigo-500"></div> */
-
-/* styles.css */
-
+/* 
 .bgimage {
    background-image: url('/monie.jpg');
    background-size: cover;
@@ -32,4 +14,4 @@ body {
    height: 100vh;
    opacity: 0.25;
    z-index: 0;
-}
+} */

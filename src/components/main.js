@@ -36,10 +36,12 @@ const MainPage = () => {
    };
 
    return (
-      <main className="w-[70%] md:w-[85%] flex flex-col md:flex-row lg:w-[80%] justify-between items-center space-y-4 md:space-y-0 md:space-x-9 m-auto mt-10 mb-10 ">
+      // <main className="w-[70%] md:w-[85%] flex flex-col md:flex-row lg:w-[80%] justify-between items-center space-y-4 md:space-y-0 md:space-x-9 m-auto my-10 ">
+      // <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 w-[70%] md:w-[85%] lg:w-[80%] m-auto my-10 items-center justify-center">
+      <main className="grid grid-cols-1 lg:grid-cols-2 gap-9 w-[70%] md:w-[85%] lg:w-[85%] m-auto my-10 bg-whipte">
          <Toaster />
          {/* left side */}
-         <div className="w-full ">
+         <div className="w-full md:w-[90%]  ">
             <span>Stats</span>
             <div className="p-9 border border-gray-500 rounded-md ">
                <h2>12,234 ANC = $10.03M</h2>
@@ -98,39 +100,7 @@ const MainPage = () => {
             </div>
          </div>
          {/* right side */}
-         <div className="w-full px-8">
-            {/* <div className=" flex justify-center items-center py-7  ">
-               <button className="bg-transparent border border-gray-600 px-8 md:px-16 p-2">
-                  Stake
-               </button>
-               <button className="bg-gray-500 border border-gray-600 px-8 md:px-16 p-2">
-                  unStake
-               </button>
-            </div> */}
-
-            {/* <div className="flex justify-center items-center py-7">
-               <button
-                  onClick={() => handleButtonAboveClick('Stake')}
-                  className={`bg-transparent border border-gray-600 px-8 md:px-16 p-2 ${
-                     stakeButtonState === 'Stake'
-                        ? 'bg-blue-500 text-white'
-                        : ''
-                  }`}
-               >
-                  Stake
-               </button>
-               <button
-                  onClick={() => handleButtonAboveClick('Unstake')}
-                  className={`bg-gray-500 border border-gray-600 px-8 md:px-16 p-2 ${
-                     stakeButtonState === 'Unstake'
-                        ? 'bg-blue-500 text-white'
-                        : ''
-                  }`}
-               >
-                  Unstake
-               </button>
-            </div> */}
-
+         <div className="w-full md:w-[90%] ">
             <div className="flex justify-center items-center py-7">
                <button
                   onClick={() => handleButtonAboveClick('Stake')}
