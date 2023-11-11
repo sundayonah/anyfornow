@@ -11,6 +11,15 @@ const MainPage = () => {
       handleChange,
       handleMaxButtonClick,
       maxBalance,
+      totalStaker,
+      totalAmountStake,
+      walletBalance,
+      calculateReward,
+      Claim,
+      Approved,
+      isApproved,
+      ethBalance,
+      unStakeLoading,
    } = useContext(StakingContext);
 
    const { address } = useAccount();
@@ -19,21 +28,42 @@ const MainPage = () => {
 
    const handleButtonAboveClick = (buttonState) => {
       setStakeButtonState(buttonState);
-
-      if (buttonState === 'Stake') {
-      } else if (buttonState === 'Unstake') {
-      }
    };
 
-   const handleStakeAndUnStakeChange = () => {
+   const handleStakeAndUnStakeChange = async () => {
       if (stakeButtonState === 'Stake') {
-         console.log('staking');
-         Stake();
+         if (isApproved) {
+            // If approval is successful, proceed with staking
+            console.log('staking');
+            Stake();
+         } else {
+            await Approved();
+            // Handle approval failure (show a message, etc.)
+            console.log('Approval main');
+         }
       } else {
          console.log('unstaking');
-         UnStake();
+         await UnStake();
       }
    };
+
+   // const handleButtonAboveClick = (buttonState) => {
+   //    setStakeButtonState(buttonState);
+
+   //    if (buttonState === 'Stake') {
+   //    } else if (buttonState === 'Unstake') {
+   //    }
+   // };
+
+   // const handleStakeAndUnStakeChange = () => {
+   //    if (stakeButtonState === 'Stake') {
+   //       console.log('staking');
+   //       Stake();
+   //    } else {
+   //       console.log('unstaking');
+   //       UnStake();
+   //    }
+   // };
 
    return (
       // <main className="w-[70%] md:w-[85%] flex flex-col md:flex-row lg:w-[80%] justify-between items-center space-y-4 md:space-y-0 md:space-x-9 m-auto my-10 ">
@@ -44,16 +74,17 @@ const MainPage = () => {
          <div className="w-full md:w-[80%] m-auto  ">
             <span>Stats</span>
             <div className="p-9 border border-gray-600 rounded-md ">
-               <h2>12,234 ANC = $10.03M</h2>
-               <h6 className="text-sm text-gray-500">Total Staked ANC</h6>
+               <h2>${totalAmountStake} MONIE = $10.03M</h2>
+               <h6 className="text-sm text-gray-500">Total Staked MONIE</h6>
                <div className="flex justify-between items-center pt-5">
                   <span>
-                     <h2>23.23%</h2>
+                     <h2>0.5% Daily</h2>
+
                      <span className="text-sm  text-gray-500">APR</span>
                   </span>
                   <span className="inline-block h-12 border-r border-solid border-gray-600"></span>
                   <span>
-                     <h2>4,554</h2>
+                     <h2>{totalStaker}</h2>
                      <span className="text-sm  text-gray-500">
                         No. of Stakers
                      </span>
@@ -66,15 +97,15 @@ const MainPage = () => {
                   <div className="flex pb-3 justify-between border-b border-gray-600">
                      <div className="flex  ">
                         <img
-                           src="/monie.jpg"
+                           src="/ethereum-eth.svg"
                            // width={30}
                            // height={20}
                            alt="image"
                            className="w-5 h-5 rounded-full object-cover"
                         />
-                        <span className="pl-1 text-gray-500">ANC</span>
+                        <span className="pl-1 text-gray-500">ETH</span>
                      </div>
-                     <p>0</p>
+                     <p>{ethBalance}</p>
                   </div>
                   <div className="flex pb-3 pt-3 justify-between border-b border-gray-600">
                      <div className="flex ">
@@ -85,17 +116,20 @@ const MainPage = () => {
                            alt="image"
                            className="w-5 h-5 rounded-full object-cover"
                         />
-                        <span className="pl-1 text-gray-500">ANC</span>
+                        <span className="pl-1 text-gray-500">MONIE</span>
                      </div>
-                     <p>0</p>
+                     <p>{walletBalance}</p>
                   </div>
                   <div className="flex pt-3 justify-between items-center">
                      <div className=" pb-2 ">
-                        <span className="pl-2">0 ANC</span>
+                        <span className="pl-2">{calculateReward} MONIE</span>
                         {/* <p>Research</p> */}
                      </div>
                      {/* <button className="bg-blue-800 hover:bg-blue-700 py-1 px-2 rounded-md"> */}
-                     <button className="bg-gradient-to-b from-blue-500 hover:bg-blue-900 py-1 px-2 rounded-md">
+                     <button
+                        onClick={() => Claim()}
+                        className="bg-gradient-to-b from-blue-500 hover:bg-blue-900 py-1 px-2 rounded-md"
+                     >
                         Claim Now
                      </button>
                   </div>
@@ -163,7 +197,10 @@ const MainPage = () => {
                      onClick={handleStakeAndUnStakeChange}
                      className="w-full bg-gradient-to-b from-blue-500 hover:bg-blue-900 p-2 rounded-md"
                   >
-                     {stakeButtonState}
+                     {/* {stakeButtonState} */}
+                     {stakeButtonState === 'Stake' && !isApproved
+                        ? 'Approve'
+                        : stakeButtonState}
                   </button>
                </div>
 
@@ -171,15 +208,15 @@ const MainPage = () => {
                   <span className="text-sm text-gray-500">
                      You will Recieve
                   </span>
-                  <p className="text-sm">0 ANC</p>
+                  <p className="text-sm">{calculateReward} MONIE</p>
                </div>
-               <div className="flex justify-between items-center py-2 px-4">
+               {/* <div className="flex justify-between items-center py-2 px-4">
                   <span className="text-sm text-gray-500">Exchange Rate</span>
                   <p className="text-sm">1 ANC = 1500 ANC</p>
-               </div>
+               </div> */}
                <div className="flex justify-between items-center py-2 px-4">
                   <span className="text-sm text-gray-500">Staking APR</span>
-                  <p className="text-sm">0.5%</p>
+                  <p className="text-sm">0.5% daily</p>
                </div>
             </div>
          </div>
@@ -189,3 +226,8 @@ const MainPage = () => {
 
 export default MainPage;
 //
+// loading
+
+// <div class="flex items-center justify-center">
+//    <div class="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white"></div>
+// </div>;

@@ -6,8 +6,7 @@
             "internalType": "uint256",
             "name": "miniMumStake",
             "type": "uint256"
-         },
-         { "internalType": "uint256", "name": "referral", "type": "uint256" }
+         }
       ],
       "stateMutability": "nonpayable",
       "type": "constructor"
@@ -141,31 +140,6 @@
       "anonymous": false,
       "inputs": [
          {
-            "indexed": true,
-            "internalType": "address",
-            "name": "_from",
-            "type": "address"
-         },
-         {
-            "indexed": false,
-            "internalType": "uint256",
-            "name": "_amount",
-            "type": "uint256"
-         },
-         {
-            "indexed": false,
-            "internalType": "uint256",
-            "name": "_time",
-            "type": "uint256"
-         }
-      ],
-      "name": "referralClaimed",
-      "type": "event"
-   },
-   {
-      "anonymous": false,
-      "inputs": [
-         {
             "indexed": false,
             "internalType": "uint256",
             "name": "tokenAmount",
@@ -195,13 +169,6 @@
    },
    {
       "inputs": [],
-      "name": "DAYS30_RATE",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-      "stateMutability": "view",
-      "type": "function"
-   },
-   {
-      "inputs": [],
       "name": "ENTRY_RATE",
       "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
       "stateMutability": "view",
@@ -215,13 +182,6 @@
       "type": "function"
    },
    {
-      "inputs": [],
-      "name": "YEAR_RATE",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-      "stateMutability": "view",
-      "type": "function"
-   },
-   {
       "inputs": [
          {
             "internalType": "address",
@@ -230,17 +190,8 @@
          }
       ],
       "name": "calculateRewards",
-      "outputs": [
-         { "internalType": "uint256", "name": "reward", "type": "uint256" }
-      ],
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
       "stateMutability": "view",
-      "type": "function"
-   },
-   {
-      "inputs": [],
-      "name": "claimReferralRewards",
-      "outputs": [],
-      "stateMutability": "nonpayable",
       "type": "function"
    },
    {
@@ -260,9 +211,9 @@
       "type": "function"
    },
    {
-      "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-      "name": "isReferral",
-      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "inputs": [],
+      "name": "minimum",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
       "stateMutability": "view",
       "type": "function"
    },
@@ -284,40 +235,6 @@
       "inputs": [],
       "name": "owner",
       "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-      "stateMutability": "view",
-      "type": "function"
-   },
-   {
-      "inputs": [],
-      "name": "referralBonus",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-      "stateMutability": "view",
-      "type": "function"
-   },
-   {
-      "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-      "name": "referralBonusGain",
-      "outputs": [
-         {
-            "internalType": "uint256",
-            "name": "referralBonus",
-            "type": "uint256"
-         },
-         {
-            "internalType": "uint256",
-            "name": "intialTimestamp",
-            "type": "uint256"
-         }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-   },
-   {
-      "inputs": [
-         { "internalType": "address", "name": "_referral", "type": "address" }
-      ],
-      "name": "referralRewards",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
       "stateMutability": "view",
       "type": "function"
    },
@@ -349,12 +266,34 @@
    },
    {
       "inputs": [
-         { "internalType": "uint256", "name": "_quantity", "type": "uint256" },
-         { "internalType": "address", "name": "_referral", "type": "address" }
+         { "internalType": "uint256", "name": "_apr", "type": "uint256" }
+      ],
+      "name": "setRates",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+   },
+   {
+      "inputs": [
+         { "internalType": "uint256", "name": "_quantity", "type": "uint256" }
       ],
       "name": "stake",
       "outputs": [],
       "stateMutability": "nonpayable",
+      "type": "function"
+   },
+   {
+      "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "name": "staked",
+      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "stateMutability": "view",
+      "type": "function"
+   },
+   {
+      "inputs": [],
+      "name": "totalStaker",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
       "type": "function"
    },
    {
@@ -378,15 +317,6 @@
          { "internalType": "uint256", "name": "_amount", "type": "uint256" }
       ],
       "name": "unStake",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-   },
-   {
-      "inputs": [
-         { "internalType": "uint256", "name": "_newBonus", "type": "uint256" }
-      ],
-      "name": "updateReferralBonus",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
