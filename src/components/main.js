@@ -74,7 +74,7 @@ const MainPage = () => {
          <div className="w-full md:w-[80%] m-auto  ">
             <span>Stats</span>
             <div className="p-9 border border-gray-600 rounded-md ">
-               <h2>${totalAmountStake} MONIE = $10.03M</h2>
+               <h2>${totalAmountStake} MONIE</h2>
                <h6 className="text-sm text-gray-500">Total Staked MONIE</h6>
                <div className="flex justify-between items-center pt-5">
                   <span>

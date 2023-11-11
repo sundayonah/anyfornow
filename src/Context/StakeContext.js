@@ -87,7 +87,6 @@ export const StakingContextProvider = ({ children }) => {
          const stringBalance = ethers.utils.formatEther(balance.toString());
 
          const formattedBalance = parseFloat(stringBalance).toFixed(3);
-         console.log(formattedBalance);
 
          setMaxBalance(formattedBalance);
          setStakeAmount(formattedBalance);
@@ -112,8 +111,6 @@ export const StakingContextProvider = ({ children }) => {
             const approveContractAddress =
                await getApproveContractAddress.TOKEN();
 
-            console.log(approveContractAddress);
-
             const contractInstance = new ethers.Contract(
                approveContractAddress,
                approveAbi,
@@ -125,14 +122,13 @@ export const StakingContextProvider = ({ children }) => {
             const stringBalance = ethers.utils.formatEther(balance.toString());
 
             const formattedBalance = parseFloat(stringBalance).toFixed(3);
-            console.log(formattedBalance);
             setWalletBalance(formattedBalance);
 
             // getting eth balance
             const getEthBalance = await provider.getBalance(address);
             const balanceEther = ethers.utils.formatEther(getEthBalance);
 
-            setEthBalance(balanceEther);
+            setEthBalance(Number(balanceEther).toFixed(4));
          } catch (error) {
             console.error(error);
          }
@@ -158,8 +154,10 @@ export const StakingContextProvider = ({ children }) => {
                totalAmountStake,
                'ether'
             );
-            console.log(totalStaking);
-            setTotalAmountStake(totalStaking);
+
+            const totalAmount = Number(totalStaking).toFixed(4);
+
+            setTotalAmountStake(totalAmount);
 
             // referral rewards
             const maxReward = await contractInstance.calculateRewards(address);
@@ -167,27 +165,7 @@ export const StakingContextProvider = ({ children }) => {
             const reward = ethers.utils.formatUnits(maxReward, 'ether');
             const calculateReward = Number(reward).toFixed(5);
 
-            console.log(calculateReward);
             setCalulateReward(calculateReward);
-
-            // // referral bonus gain
-            // const referralBonusGain = await contractInstance.referralBonusGain(
-            //    address
-            // );
-            // const referralBonusWithdrawn = referralBonusGain[1];
-            // const nextReferralTime = referralBonusWithdrawn;
-
-            // const time = new Date(nextReferralTime * 1000);
-            // const format = time.toLocaleString();
-
-            // if (nextReferralTime == '0') {
-            //    setWithdrawnReferral('0');
-            // } else {
-            //    setWithdrawnReferral(format);
-            // }
-
-            // const refferTime = new Date(referralTime * 1000);
-            // const formattedNextClaimTime1 = ClaimTime.toLocaleString();
          } catch (error) {
             console.error(error);
          }
@@ -284,7 +262,6 @@ export const StakingContextProvider = ({ children }) => {
          const _amount = ethers.utils.parseEther(stakeAmount, 'ether');
 
          const stringAmount = _amount.toString();
-         console.log(stringAmount);
 
          // // Convert back to Ether format for logging or displaying
          // const formattedAmount = ethers.utils.formatEther(_amount);
