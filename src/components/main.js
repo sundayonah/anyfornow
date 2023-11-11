@@ -1,10 +1,19 @@
 import React, { useContext, useState } from 'react';
 import { StakingContext } from '@/Context/StakeContext';
 import toast, { Toaster } from 'react-hot-toast';
+import { useAccount } from 'wagmi';
 
 const MainPage = () => {
-   const { UnStake, Stake, stakeAmount, handleChange } =
-      useContext(StakingContext);
+   const {
+      UnStake,
+      Stake,
+      stakeAmount,
+      handleChange,
+      handleMaxButtonClick,
+      maxBalance,
+   } = useContext(StakingContext);
+
+   const { address } = useAccount();
 
    const [stakeButtonState, setStakeButtonState] = useState('Stake'); // Initial state
 
@@ -19,15 +28,15 @@ const MainPage = () => {
    const handleStakeAndUnStakeChange = () => {
       if (stakeButtonState === 'Stake') {
          console.log('staking');
-         // Stake();
+         Stake();
       } else {
          console.log('unstaking');
-         // UnStake();
+         UnStake();
       }
    };
 
    return (
-      <main className="w-[70%] md:w-[85%] flex flex-col md:flex-row lg:w-[80%] justify-between items-center space-y-4 md:space-y-0 md:space-x-9 m-auto mt-10 mb-10">
+      <main className="w-[70%] md:w-[85%] flex flex-col md:flex-row lg:w-[80%] justify-between items-center space-y-4 md:space-y-0 md:space-x-9 m-auto mt-10 mb-10 ">
          <Toaster />
          {/* left side */}
          <div className="w-full ">
@@ -55,7 +64,7 @@ const MainPage = () => {
                   <div className="flex pb-3 justify-between border-b-[1px]">
                      <div className="flex  ">
                         <img
-                           src="/stake.jpg"
+                           src="/monie.jpg"
                            // width={30}
                            // height={20}
                            alt="image"
@@ -68,7 +77,7 @@ const MainPage = () => {
                   <div className="flex pb-3 pt-3 justify-between border-b-[1px]">
                      <div className="flex ">
                         <img
-                           src="/stake.jpg"
+                           src="/monie.jpg"
                            // width={30}
                            // height={20}
                            alt="image"
@@ -151,7 +160,7 @@ const MainPage = () => {
                </div>
                <div className="w-[90%] m-auto flex justify-center items-center border border-gray-500 px-4 py-1">
                   <img
-                     src="/stake.jpg"
+                     src="/monie.jpg"
                      // width={30}
                      // height={20}
                      alt="image"
@@ -163,7 +172,15 @@ const MainPage = () => {
                      value={stakeAmount}
                      onChange={handleChange}
                   />
-                  <button className="text-sm p-1 bg-blue-700 hover:bg-blue-600 rounded-md">
+                  <button
+                     onClick={handleMaxButtonClick}
+                     className={
+                        address
+                           ? `text-sm py-1 px-2 bg-blue-700 hover:bg-blue-600 rounded-md`
+                           : `text-sm py-1 px-2 bg-gray-700  rounded-md cursor-not-allowed`
+                     }
+                     // className="text-sm p-1 bg-blue-700 hover:bg-blue-600 rounded-md"
+                  >
                      MAX
                   </button>
                </div>

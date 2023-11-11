@@ -20,3 +20,16 @@ body {
    color: #fff;
    background: #061042;
 }
+
+/* <div class="h-14 bg-gradient-to-r from-sky-500 to-indigo-500"></div> */
+
+/* styles.css */
+
+.bgimage {
+   background-image: url('/monie.jpg');
+   background-size: cover;
+   background-position: center;
+   height: 100vh;
+   opacity: 0.25;
+   z-index: 0;
+}

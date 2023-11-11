@@ -12,8 +12,8 @@ import toast, { Toaster } from 'react-hot-toast';
 export const StakingContext = createContext({});
 
 export const StakingContextProvider = ({ children }) => {
-   const minningContractAddress = '0xE2113ac80Dde5248E771053FD3c031250E87d777';
-   // const minningTestnetContractAddress = '0x72BC9712BEb034977f5A0830CE1F3E6ff9440486';
+   // const stakingContractAddress = '0xE2113ac80Dde5248E771053FD3c031250E87d777';
+   const stakingContractAddress = '0x72BC9712BEb034977f5A0830CE1F3E6ff9440486';
    // const approveContractAddress = '0x97Df9831BEA07703F72287A90C163726315eB1Fd';
 
    const { address, isConnected } = useAccount();
@@ -40,27 +40,44 @@ export const StakingContextProvider = ({ children }) => {
    const [lessAmount, setLessAmount] = useState(false);
    const [provider, setProvider] = useState(null);
    const [signer, setSigner] = useState(null);
-
-   // console.log(address);
-   // console.log(isConnected);
+   const [maxBalance, setMaxBalance] = useState(''); // State to store the max balance
 
    const handleChange = async (e) => {
       setStakeAmount(e.target.value);
    };
-   useEffect(() => {
-      async function initializeWeb3() {
-         if (typeof window.ethereum !== 'undefined') {
-            const web3Provider = new ethers.providers.Web3Provider(
-               window.ethereum
-            );
-            const web3Signer = web3Provider.getSigner();
-            setProvider(web3Provider);
-            setSigner(web3Signer);
-         }
-      }
 
-      initializeWeb3();
-   }, []);
+   async function getContract() {
+      try {
+         const provider = new ethers.providers.Web3Provider(window.ethereum);
+         const signer = provider.getSigner();
+
+         const contractInstance = new ethers.Contract(
+            stakingContractAddress,
+            stakingAbi,
+            signer
+         );
+
+         return contractInstance;
+      } catch (error) {
+         console.error('Error getting approval contract:', error);
+         throw error;
+      }
+   }
+
+   const handleMaxButtonClick = async () => {
+      try {
+         const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+         const balance = await provider.getBalance(address);
+
+         const etherBalance = ethers.utils.formatEther(balance);
+
+         setMaxBalance(etherBalance);
+         setStakeAmount(etherBalance);
+      } catch (error) {
+         console.error('Error fetching balance:', error);
+      }
+   };
 
    ///// WALLET BALANCE ///////////
    useEffect(() => {
@@ -73,11 +90,7 @@ export const StakingContextProvider = ({ children }) => {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
 
-            const getApproveContractAddress = new ethers.Contract(
-               minningContractAddress,
-               stakingAbi,
-               signer
-            );
+            const getApproveContractAddress = await getContract();
 
             const approveContractAddress =
                await getApproveContractAddress.TOKEN();
@@ -92,6 +105,7 @@ export const StakingContextProvider = ({ children }) => {
             const stringBalance = ethers.utils.formatEther(balance.toString());
 
             const formattedBalance = parseFloat(stringBalance).toFixed(3);
+            console.log(formattedBalance);
             setWalletBalance(formattedBalance);
          } catch (error) {
             console.error(error);
@@ -105,17 +119,7 @@ export const StakingContextProvider = ({ children }) => {
    useEffect(() => {
       const viewFunction = async () => {
          try {
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            // const provider = new ethers.getDefaultProvider(
-            //    'https://bsc-dataseed1.binance.org/'
-            // );
-
-            // const signer = provider.getSigner();
-            const contractInstance = new ethers.Contract(
-               minningContractAddress,
-               stakingAbi,
-               provider
-            );
+            const contractInstance = await getContract();
 
             // total staking
             const max = await contractInstance.totalStaking();
@@ -124,6 +128,7 @@ export const StakingContextProvider = ({ children }) => {
 
             // daily roi
             const roi = await contractInstance.YEAR_RATE();
+
             const dailyRoi = roi.toString();
             const dailyRoiInEther = ethers.utils.formatUnits(dailyRoi, 'ether');
             const dailyRoiAmount = (dailyRoiInEther / 60) * 30;
@@ -171,11 +176,15 @@ export const StakingContextProvider = ({ children }) => {
 
    ///// UNSTAKE F(x) ///////////
    const UnStake = async () => {
-      const contract = new ethers.Contract(
-         minningContractAddress,
-         stakingAbi,
-         signer
-      );
+      // const contract = new ethers.Contract(
+      //    stakingContractAddress,
+      //    stakingAbi,
+      //    signer
+      // );
+
+      const contract = await getContract();
+
+      console.log(contract);
 
       if (address === undefined) {
          toast.success(`Please Connect Your Wallet.`, {
@@ -194,7 +203,6 @@ export const StakingContextProvider = ({ children }) => {
       // setStakeLoading(true);
       try {
          let tx;
-
          if (profitPool == 0) {
             setNoProfitYet(true);
             setTimeout(() => {
@@ -222,26 +230,11 @@ export const StakingContextProvider = ({ children }) => {
       // setStakeLoading(false);
    };
 
-   const handleMaxClick = async () => {
-      try {
-         const balance = await provider.getBalance(address);
-
-         // Convert balance to Ether and set it in the state
-         setMaxBalance(ethers.utils.formatEther(balance));
-      } catch (error) {
-         console.error('Error fetching balance:', error);
-      }
-   };
-
    ///// STAKE F(x) ///////////
    const Stake = async () => {
       setStakeLoading(true);
       try {
-         const contract = new ethers.Contract(
-            minningContractAddress,
-            stakingAbi,
-            signer
-         );
+         const contract = await getContract();
 
          if (address === undefined) {
             toast.success(`Please Connect Your Wallet.`, {
@@ -256,22 +249,14 @@ export const StakingContextProvider = ({ children }) => {
             return;
          }
          const _amount = ethers.utils.parseEther(stakeAmount, 'ether');
-         console.log(_amount);
-         const stringAmount = _amount.toString();
-         console.log(stringAmount);
+         // console.log(_amount);
 
-         // if (_amount < 0 || stakeAmount === '') {
-         //    toast.success(`Please input Amount `, {
-         //       duration: 4000,
-         //       position: 'top-right',
-         //       icon: '❌',
-         //       style: {
-         //          background: '#fff',
-         //          border: '1px solid #a16206',
-         //       },
-         //    });
-         //    return;
-         // }
+         // const stringAmount = _amount.toString();
+         // console.log(stringAmount);
+
+         // // Convert back to Ether format for logging or displaying
+         // const formattedAmount = ethers.utils.formatEther(_amount);
+         // console.log(formattedAmount);
 
          const tx = await contract.stake(_amount, {
             gasLimit: 300000,
@@ -303,7 +288,7 @@ export const StakingContextProvider = ({ children }) => {
 
       try {
          const getApproveContractAddress = new ethers.Contract(
-            minningContractAddress,
+            stakingContractAddress,
             stakingAbi,
             signer
          );
@@ -318,7 +303,7 @@ export const StakingContextProvider = ({ children }) => {
 
          const checkIfApprove = await contractInstance.allowance(
             address,
-            minningContractAddress
+            stakingContractAddress
          );
          // console.log(contractInstance);
 
@@ -354,7 +339,7 @@ export const StakingContextProvider = ({ children }) => {
             setApprovedLoading(true);
             // const value = ethers.utils.parseEther(_amount, 'ether');
             tx = await contractInstance.approve(
-               minningContractAddress,
+               stakingContractAddress,
                amountToString,
                {
                   gasLimit: 51000,
@@ -394,7 +379,7 @@ export const StakingContextProvider = ({ children }) => {
 
       try {
          const contract = new ethers.Contract(
-            minningContractAddress,
+            stakingContractAddress,
             stakingAbi,
             signer
          );
@@ -447,6 +432,7 @@ export const StakingContextProvider = ({ children }) => {
             lessAmount,
             approvedLoading,
             stakeLoading,
+            maxBalance,
 
             // f(x)s
             Stake,
@@ -455,6 +441,7 @@ export const StakingContextProvider = ({ children }) => {
             Approved,
             setIsApproved,
             ClaimReferralRewards,
+            handleMaxButtonClick,
          }}
       >
          {children}

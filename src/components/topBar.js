@@ -2,7 +2,7 @@ import React from 'react';
 
 const TopBar = () => {
    return (
-      <div className="flex justify-center items-center mt-5">
+      <div className="flex justify-center items-center mt-28 z-0">
          <div>
             <h1 className="flex justify-center text-lg italic ">
                Stake Anchor
