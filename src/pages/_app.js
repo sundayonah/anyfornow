@@ -1,4 +1,4 @@
-// import { MinningContextProvider } from '@/Context/MinnigContext';
+import { StakingContextProvider } from '@/Context/StakeContext';
 import '@/styles/globals.css';
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react';
 
@@ -34,9 +34,9 @@ createWeb3Modal({ wagmiConfig, projectId, chains });
 export default function App({ Component, pageProps }) {
    return (
       <WagmiConfig config={wagmiConfig}>
-         <MinningContextProvider>
+         <StakingContextProvider>
             <Component {...pageProps} />
-         </MinningContextProvider>
+         </StakingContextProvider>
       </WagmiConfig>
    );
 }
