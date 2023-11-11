@@ -13,7 +13,7 @@ const MainPage = () => {
                      <h2>23.23%</h2>
                      <span className="text-sm  text-gray-500">APR</span>
                   </span>
-                  <span className="inline-block h-8 border-r border-solid border-gray-400"></span>
+                  <span className="inline-block h-12 border-r border-solid border-gray-400"></span>
                   <span>
                      <h2>4,554</h2>
                      <span className="text-sm  text-gray-500">
@@ -25,29 +25,29 @@ const MainPage = () => {
             <div className="mt-10">
                <span className="">Balances</span>
                <div className="p-6  border border-gray-500 rounded-md ">
-                  <div className="flex pb-5 justify-between border-b-[1px]">
+                  <div className="flex pb-3 justify-between border-b-[1px]">
                      <div className="flex  ">
                         <img
                            src="/stake.jpg"
-                           width={20}
-                           height={20}
+                           // width={30}
+                           // height={20}
                            alt="image"
-                           className="rounded-full "
+                           className="w-5 h-5 rounded-full object-cover"
                         />
-                        <span className="pl-2 text-gray-500">ANC</span>
+                        <span className="pl-1 text-gray-500">ANC</span>
                      </div>
                      <p>0</p>
                   </div>
-                  <div className="flex pb-5 pt-3 justify-between border-b-[1px]">
-                     <div className="flex pb-5 ">
+                  <div className="flex pb-3 pt-3 justify-between border-b-[1px]">
+                     <div className="flex ">
                         <img
                            src="/stake.jpg"
-                           width={20}
-                           height={20}
+                           // width={30}
+                           // height={20}
                            alt="image"
-                           className="rounded-full "
+                           className="w-5 h-5 rounded-full object-cover"
                         />
-                        <span className="pl-2 text-gray-500">ANC</span>
+                        <span className="pl-1 text-gray-500">ANC</span>
                      </div>
                      <p>0</p>
                   </div>
@@ -63,10 +63,10 @@ const MainPage = () => {
          </div>
          <div className="w-[80%] px-8">
             <div className="flex justify-center items-center py-7 ">
-               <button className="bg-transparent border border-gray-600 px-1 p-2">
+               <button className="bg-transparent border border-gray-600 px-16 p-2">
                   Stake
                </button>
-               <button className="bg-gray-500 border border-gray-600 px-1 p-2">
+               <button className="bg-gray-500 border border-gray-600 px-16 p-2">
                   unStake
                </button>
             </div>
@@ -75,19 +75,19 @@ const MainPage = () => {
                   <span>Stake</span>
                   <span>X</span>
                </div>
-               <div className="w-[90%] m-auto flex justify-center border border-gray-500 px-4 py-1">
+               <div className="w-[90%] m-auto flex justify-center items-center border border-gray-500 px-4 py-1">
                   <img
                      src="/stake.jpg"
-                     width={20}
-                     height={20}
+                     // width={30}
+                     // height={20}
                      alt="image"
-                     className="rounded-full"
+                     className="w-5 h-5 rounded-full object-cover"
                   />
                   <input
                      className="w-full bg-transparent focus:outline-none p-1"
                      placeholder="0.0"
                   />
-                  <button className="text-sm px-1 bg-gray-600 rounded-md">
+                  <button className="text-sm p-1 bg-gray-600 rounded-md">
                      MAX
                   </button>
                </div>
