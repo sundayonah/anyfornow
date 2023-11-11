@@ -4,11 +4,12 @@ import { InjectedConnector } from 'wagmi/connectors/injected';
 import { useWeb3Modal, useWeb3ModalTheme } from '@web3modal/wagmi/react';
 import { ethers } from 'ethers';
 import stakingAbi from '@/Contract/stakingAbi.json';
-// import approveAbi from '../contract/approve.json';
+import approveAbi from '@/Contract/approve.json';
+import toast, { Toaster } from 'react-hot-toast';
 
 // import axios from 'axios';
 
-export const StakeContext = createContext({});
+export const StakingContext = createContext({});
 
 export const StakingContextProvider = ({ children }) => {
    const minningContractAddress = '0xE2113ac80Dde5248E771053FD3c031250E87d777';
@@ -175,6 +176,20 @@ export const StakingContextProvider = ({ children }) => {
          stakingAbi,
          signer
       );
+
+      if (address === undefined) {
+         toast.success(`Please Connect Your Wallet.`, {
+            duration: 4000,
+            position: 'top-right',
+            icon: '❌',
+            style: {
+               background: '#fff',
+               border: '1px solid #a16206',
+            },
+         });
+         return;
+      }
+
       setNoProfitYet(false);
       // setStakeLoading(true);
       try {
@@ -207,6 +222,17 @@ export const StakingContextProvider = ({ children }) => {
       // setStakeLoading(false);
    };
 
+   const handleMaxClick = async () => {
+      try {
+         const balance = await provider.getBalance(address);
+
+         // Convert balance to Ether and set it in the state
+         setMaxBalance(ethers.utils.formatEther(balance));
+      } catch (error) {
+         console.error('Error fetching balance:', error);
+      }
+   };
+
    ///// STAKE F(x) ///////////
    const Stake = async () => {
       setStakeLoading(true);
@@ -217,19 +243,37 @@ export const StakingContextProvider = ({ children }) => {
             signer
          );
 
+         if (address === undefined) {
+            toast.success(`Please Connect Your Wallet.`, {
+               duration: 4000,
+               position: 'top-right',
+               icon: '❌',
+               style: {
+                  background: '#fff',
+                  border: '1px solid #a16206',
+               },
+            });
+            return;
+         }
          const _amount = ethers.utils.parseEther(stakeAmount, 'ether');
-         // const stringAmount = __amount.toString();
+         console.log(_amount);
+         const stringAmount = _amount.toString();
+         console.log(stringAmount);
 
-         // Extract the referral address from the URL query parameters
-         const queryParams = new URLSearchParams(window.location.search);
-         const referralAddress = queryParams.get('ref');
+         // if (_amount < 0 || stakeAmount === '') {
+         //    toast.success(`Please input Amount `, {
+         //       duration: 4000,
+         //       position: 'top-right',
+         //       icon: '❌',
+         //       style: {
+         //          background: '#fff',
+         //          border: '1px solid #a16206',
+         //       },
+         //    });
+         //    return;
+         // }
 
-         const actualReferralAddress =
-            referralAddress || '0x0000000000000000000000000000000000000000';
-
-         // Pass the referralAddress as an argument to the Stake function
-
-         const tx = await contract.stake(_amount, actualReferralAddress, {
+         const tx = await contract.stake(_amount, {
             gasLimit: 300000,
             gasPrice: ethers.utils.parseUnits('10.0', 'gwei'),
          });
@@ -385,7 +429,7 @@ export const StakingContextProvider = ({ children }) => {
    };
 
    return (
-      <StakeContext.Provider
+      <StakingContext.Provider
          value={{
             // state variables
             noProfitYet,
@@ -414,6 +458,6 @@ export const StakingContextProvider = ({ children }) => {
          }}
       >
          {children}
-      </StakeContext.Provider>
+      </StakingContext.Provider>
    );
 };

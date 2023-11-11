@@ -41,7 +41,10 @@ const Header = () => {
                   </div>
                </ul>
             ))} */}
-            <ConnectButton />
+            {/* <ConnectButton /> */}
+            <div className="">
+               <w3m-button balance="hide" />
+            </div>
          </div>
          <style jsx>{`
             .active-link {

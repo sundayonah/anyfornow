@@ -1,8 +1,34 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { StakingContext } from '@/Context/StakeContext';
+import toast, { Toaster } from 'react-hot-toast';
 
 const MainPage = () => {
+   const { UnStake, Stake, stakeAmount, handleChange } =
+      useContext(StakingContext);
+
+   const [stakeButtonState, setStakeButtonState] = useState('Stake'); // Initial state
+
+   const handleButtonAboveClick = (buttonState) => {
+      setStakeButtonState(buttonState);
+
+      if (buttonState === 'Stake') {
+      } else if (buttonState === 'Unstake') {
+      }
+   };
+
+   const handleStakeAndUnStakeChange = () => {
+      if (stakeButtonState === 'Stake') {
+         console.log('staking');
+         // Stake();
+      } else {
+         console.log('unstaking');
+         // UnStake();
+      }
+   };
+
    return (
       <main className="w-[70%] md:w-[85%] flex flex-col md:flex-row lg:w-[80%] justify-between items-center space-y-4 md:space-y-0 md:space-x-9 m-auto mt-10 mb-10">
+         <Toaster />
          {/* left side */}
          <div className="w-full ">
             <span>Stats</span>
@@ -64,12 +90,58 @@ const MainPage = () => {
          </div>
          {/* right side */}
          <div className="w-full px-8">
-            <div className=" flex justify-center items-center py-7  ">
+            {/* <div className=" flex justify-center items-center py-7  ">
                <button className="bg-transparent border border-gray-600 px-8 md:px-16 p-2">
                   Stake
                </button>
                <button className="bg-gray-500 border border-gray-600 px-8 md:px-16 p-2">
                   unStake
+               </button>
+            </div> */}
+
+            {/* <div className="flex justify-center items-center py-7">
+               <button
+                  onClick={() => handleButtonAboveClick('Stake')}
+                  className={`bg-transparent border border-gray-600 px-8 md:px-16 p-2 ${
+                     stakeButtonState === 'Stake'
+                        ? 'bg-blue-500 text-white'
+                        : ''
+                  }`}
+               >
+                  Stake
+               </button>
+               <button
+                  onClick={() => handleButtonAboveClick('Unstake')}
+                  className={`bg-gray-500 border border-gray-600 px-8 md:px-16 p-2 ${
+                     stakeButtonState === 'Unstake'
+                        ? 'bg-blue-500 text-white'
+                        : ''
+                  }`}
+               >
+                  Unstake
+               </button>
+            </div> */}
+
+            <div className="flex justify-center items-center py-7">
+               <button
+                  onClick={() => handleButtonAboveClick('Stake')}
+                  className={` border border-gray-600 px-8 md:px-16 p-2 ${
+                     stakeButtonState === 'Stake'
+                        ? 'bg-blue-500 hover:bg-blue-600 text-white'
+                        : ''
+                  }`}
+               >
+                  Stake
+               </button>
+               <button
+                  onClick={() => handleButtonAboveClick('Unstake')}
+                  className={` border border-gray-600 px-8 md:px-16 p-2 ${
+                     stakeButtonState === 'Unstake'
+                        ? 'bg-blue-500 hover:bg-blue-600 text-white'
+                        : ''
+                  }`}
+               >
+                  Unstake
                </button>
             </div>
             <div className=" border border-gray-500 rounded-md">
@@ -88,14 +160,21 @@ const MainPage = () => {
                   <input
                      className="w-full bg-transparent focus:outline-none p-1"
                      placeholder="0.0"
+                     value={stakeAmount}
+                     onChange={handleChange}
                   />
-                  <button className="text-sm p-1 bg-gray-600 rounded-md">
+                  <button className="text-sm p-1 bg-blue-700 hover:bg-blue-600 rounded-md">
                      MAX
                   </button>
                </div>
 
-               <div className="flex  justify-center items-center   px-4 py-2">
-                  <button className="w-full bg-gray-600 p-1">Stake</button>
+               <div className="flex justify-center items-center px-4 py-2">
+                  <button
+                     onClick={handleStakeAndUnStakeChange}
+                     className="w-full bg-blue-700 hover:bg-blue-600 p-2 rounded-md"
+                  >
+                     {stakeButtonState}
+                  </button>
                </div>
 
                <div className="flex justify-between items-center py-2 px-4">

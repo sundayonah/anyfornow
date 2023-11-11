@@ -14,14 +14,14 @@ import {
 } from 'wagmi/chains';
 
 // 1. Get projectId
-const projectId = 'de7693706b2bb6e9b2e049f09e7ebad1';
+const projectId = '60fa83860edbb9d7d2e1df131caa2675';
 // const projectId = 'de7693706b2bb6e9b2e049f09e7ebad1';
 
 // 2. Create wagmiConfig
 const metadata = {
-   name: 'Minning dApp',
-   description: 'Web3Modal Example',
-   url: 'Web3Modal Example',
+   name: 'Staking dApp',
+   description: 'Staking',
+   url: 'Staking',
    icons: ['https://avatars.githubusercontent.com/u/37784886'],
 };
 
