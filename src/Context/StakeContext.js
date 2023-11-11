@@ -240,7 +240,7 @@ export const StakingContextProvider = ({ children }) => {
          // } else {
          // setNoProfitYet(false);
          // setProfitLoading(true);
-         tx = await contract.unStake(stringAmount, {
+         tx = await contract.unStake(stakeAmount, {
             gasLimit: 600000,
             gasPrice: ethers.utils.parseUnits('10.0', 'gwei'),
          });
@@ -285,8 +285,6 @@ export const StakingContextProvider = ({ children }) => {
 
          const stringAmount = _amount.toString();
          console.log(stringAmount);
-
-         console.log('stakiiiiing');
 
          // // Convert back to Ether format for logging or displaying
          // const formattedAmount = ethers.utils.formatEther(_amount);
