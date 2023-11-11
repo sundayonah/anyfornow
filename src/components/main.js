@@ -20,6 +20,7 @@ const MainPage = () => {
       isApproved,
       ethBalance,
       unStakeLoading,
+      claimLoading,
    } = useContext(StakingContext);
 
    const { address } = useAccount();
@@ -68,7 +69,7 @@ const MainPage = () => {
    return (
       // <main className="w-[70%] md:w-[85%] flex flex-col md:flex-row lg:w-[80%] justify-between items-center space-y-4 md:space-y-0 md:space-x-9 m-auto my-10 ">
       // <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 w-[70%] md:w-[85%] lg:w-[80%] m-auto my-10 items-center justify-center">
-      <main className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-[60%] md:w-[75%] lg:w-[75%] m-auto my-10 bg-whipte">
+      <main className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-[80%] md:w-[75%] lg:w-[75%] m-auto my-10">
          <Toaster />
          {/* left side */}
          <div className="w-full md:w-[80%] m-auto  ">
@@ -125,12 +126,23 @@ const MainPage = () => {
                         <span className="pl-2">{calculateReward} MONIE</span>
                         {/* <p>Research</p> */}
                      </div>
-                     {/* <button className="bg-blue-800 hover:bg-blue-700 py-1 px-2 rounded-md"> */}
+
                      <button
                         onClick={() => Claim()}
                         className="bg-gradient-to-b from-blue-500 hover:bg-blue-900 py-1 px-2 rounded-md"
                      >
-                        Claim Now
+                        {claimLoading ? (
+                           <div class="flex items-center justify-center  px-4 ">
+                              <div class="flex items-center justify-center  w-6 h-6">
+                                 <div class="w-2 h-2 mr-1 bg-white rounded-full animate-ping delay-100"></div>
+                                 <div class="w-2 h-4 mr-1 bg-white rounded-full animate-pulse delay-500"></div>
+                                 <div class="w-2 h-2 mr-1 bg-white rounded-full animate-ping delay-700"></div>
+                                 <div class="w-2 h-4 bg-white rounded-full animate-pulse delay-1000"></div>
+                              </div>
+                           </div>
+                        ) : (
+                           'Claim Now'
+                        )}
                      </button>
                   </div>
                </div>
@@ -228,6 +240,8 @@ export default MainPage;
 //
 // loading
 
-// <div class="flex items-center justify-center">
-//    <div class="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white"></div>
-// </div>;
+{
+   /* <div class="flex items-center justify-center">
+   <div class="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white"></div>
+</div>; */
+}

@@ -39,7 +39,7 @@ export const StakingContextProvider = ({ children }) => {
    const [noProfitYet, setNoProfitYet] = useState(false);
    const [profitLoading, setProfitLoading] = useState(false);
    const [lessAmount, setLessAmount] = useState(false);
-   const [provider, setProvider] = useState(null);
+   const [claimLoading, setClaimLoading] = useState(false);
    const [signer, setSigner] = useState(null);
    const [maxBalance, setMaxBalance] = useState('');
    const [totalAmountStake, setTotalAmountStake] = useState();
@@ -314,6 +314,8 @@ export const StakingContextProvider = ({ children }) => {
          return;
       }
 
+      setClaimLoading(true);
+
       setNoProfitYet(false);
       // setStakeLoading(true);
       try {
@@ -332,17 +334,21 @@ export const StakingContextProvider = ({ children }) => {
             });
             const receipt = await tx.wait();
             if (receipt.status == 1) {
+               setClaimLoading(false);
+
                setProfitLoading(false);
                // Reload the page after a successful transaction
                window.location.reload();
             } else {
                setProfitLoading(false);
+               setClaimLoading(false);
             }
          }
       } catch (err) {
          console.error(err);
       }
       // setStakeLoading(false);
+      setClaimLoading(false);
    };
    ///// APPROVE F(x) ///////////
    const Approved = async () => {
@@ -476,6 +482,7 @@ export const StakingContextProvider = ({ children }) => {
             calculateReward,
             ethBalance,
             unStakeLoading,
+            claimLoading,
 
             // f(x)s
             Claim,
