@@ -3,7 +3,7 @@ import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { useWeb3Modal, useWeb3ModalTheme } from '@web3modal/wagmi/react';
 import { ethers } from 'ethers';
-import stakingAbi from '../contract/stakingAbi.json';
+import stakingAbi from '@/Contract/stakingAbi.json';
 // import approveAbi from '../contract/approve.json';
 
 // import axios from 'axios';

@@ -5,7 +5,7 @@ const MainPage = () => {
       <main className="w-[80%] flex justify-between items-center space-x-9 m-auto mt-10 ">
          <div className="w-[80%] ">
             <span>Stats</span>
-            <div className="p-6 border border-gray-500 rounded-md ">
+            <div className="p-9 border border-gray-500 rounded-md ">
                <h2>12,234 ANC = $10.03M</h2>
                <h6 className="text-sm text-gray-500">Total Staked ANC</h6>
                <div className="flex justify-between items-center pt-5">
@@ -13,10 +13,11 @@ const MainPage = () => {
                      <h2>23.23%</h2>
                      <span className="text-sm  text-gray-500">APR</span>
                   </span>
+                  <span className="inline-block h-8 border-r border-solid border-gray-400"></span>
                   <span>
                      <h2>4,554</h2>
                      <span className="text-sm  text-gray-500">
-                        No of Stakers
+                        No. of Stakers
                      </span>
                   </span>
                </div>
@@ -60,8 +61,12 @@ const MainPage = () => {
                </div>
             </div>
          </div>
-         <div className="w-[80%] border">
-            <div>RIGHT SIDE</div>
+         <div className="w-[80%]">
+            <div className="flex justify-center items-center py-7">
+               <button>Stake</button>
+               <button>unStake</button>
+            </div>
+            <div className=" border">RIGHT SIDE</div>
          </div>
       </main>
    );
