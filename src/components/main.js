@@ -34,37 +34,14 @@ const MainPage = () => {
    const handleStakeAndUnStakeChange = async () => {
       if (stakeButtonState === 'Stake') {
          if (isApproved) {
-            // If approval is successful, proceed with staking
-            console.log('staking');
             Stake();
          } else {
             await Approved();
-            // Handle approval failure (show a message, etc.)
-            console.log('Approval main');
          }
       } else {
-         console.log('unstaking');
          await UnStake();
       }
    };
-
-   // const handleButtonAboveClick = (buttonState) => {
-   //    setStakeButtonState(buttonState);
-
-   //    if (buttonState === 'Stake') {
-   //    } else if (buttonState === 'Unstake') {
-   //    }
-   // };
-
-   // const handleStakeAndUnStakeChange = () => {
-   //    if (stakeButtonState === 'Stake') {
-   //       console.log('staking');
-   //       Stake();
-   //    } else {
-   //       console.log('unstaking');
-   //       UnStake();
-   //    }
-   // };
 
    return (
       // <main className="w-[70%] md:w-[85%] flex flex-col md:flex-row lg:w-[80%] justify-between items-center space-y-4 md:space-y-0 md:space-x-9 m-auto my-10 ">

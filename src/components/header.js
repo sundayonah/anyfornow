@@ -23,20 +23,8 @@ const Header = () => {
                <img src="/monie.jpg" alt="logo-image" className="h-12 w-10" />
             </div>
             <div className="flex space-x-5 justify-center items-center">
-               {/* {navMenu.map((menu, i) => (
-               <ul key={i}>
-                  <div
-                     className={
-                        router.pathname === menu.url ? 'active-link' : ''
-                     }
-                  >
-                     <Link href={menu.url}>{menu.name}</Link>
-                  </div>
-               </ul>
-            ))} */}
-               {/* <ConnectButton /> */}
                <div className="">
-                  <w3m-button balance="hide" />
+                  <w3m-button />
                </div>
             </div>
             <style jsx>{`
@@ -46,34 +34,6 @@ const Header = () => {
             `}</style>
          </div>
       </main>
-
-      // <div className="flex p-4 justify-between items-center border-b border-gray-700 shadow-custom">
-      //    <div className=" pr-2">
-      //       <img src="/monie.jpg" alt="logo-image" className="h-12 w-10" />
-      //    </div>
-      //    <div className="flex space-x-5 justify-center items-center">
-      //       {/* {navMenu.map((menu, i) => (
-      //          <ul key={i}>
-      //             <div
-      //                className={
-      //                   router.pathname === menu.url ? 'active-link' : ''
-      //                }
-      //             >
-      //                <Link href={menu.url}>{menu.name}</Link>
-      //             </div>
-      //          </ul>
-      //       ))} */}
-      //       {/* <ConnectButton /> */}
-      //       <div className="">
-      //          <w3m-button balance="hide" />
-      //       </div>
-      //    </div>
-      //    <style jsx>{`
-      //       .active-link {
-      //          color: #bf9221;
-      //       }
-      //    `}</style>
-      // </div>
    );
 };
 
