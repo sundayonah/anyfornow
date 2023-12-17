@@ -70,6 +70,19 @@ export const StakingContextProvider = ({ children }) => {
 
    const handleMaxButtonClick = async () => {
       try {
+         if (address === undefined) {
+            toast.success(`Please Connect Your Wallet.`, {
+               duration: 4000,
+               position: 'top-right',
+               icon: '❌',
+               style: {
+                  color: '#fff',
+                  background: `linear-gradient(to right, #000f58, #000624)`,
+                  // border: '1px solid #a16206',
+               },
+            });
+            return;
+         }
          const provider = new ethers.providers.Web3Provider(window.ethereum);
          const signer = provider.getSigner();
 
@@ -195,8 +208,8 @@ export const StakingContextProvider = ({ children }) => {
             position: 'top-right',
             icon: '❌',
             style: {
-               background: '#fff',
-               border: '1px solid #a16206',
+               color: '#fff',
+               background: `linear-gradient(to right, #000f58, #000624)`,
             },
          });
          return;
@@ -254,8 +267,8 @@ export const StakingContextProvider = ({ children }) => {
                position: 'top-right',
                icon: '❌',
                style: {
-                  background: '#fff',
-                  border: '1px solid #a16206',
+                  color: '#fff',
+                  background: `linear-gradient(to right, #000f58, #000624)`,
                },
             });
             return;
@@ -308,8 +321,8 @@ export const StakingContextProvider = ({ children }) => {
             position: 'top-right',
             icon: '❌',
             style: {
-               background: '#fff',
-               border: '1px solid #a16206',
+               color: '#fff',
+               background: `linear-gradient(to right, #000f58, #000624)`,
             },
          });
          return;
@@ -356,7 +369,18 @@ export const StakingContextProvider = ({ children }) => {
       // setIsLoading(true);
       // setLessAmount(false);
 
-      console.log('Apppppppprove');
+      if (address === undefined) {
+         toast.success(`Please Connect Your Wallet.`, {
+            duration: 4000,
+            position: 'top-right',
+            icon: '❌',
+            style: {
+               color: '#fff',
+               background: `linear-gradient(to right, #000f58, #000624)`,
+            },
+         });
+         return;
+      }
 
       try {
          // const getApproveContractAddress = new ethers.Contract(

@@ -170,12 +170,12 @@ const MainPage = () => {
                   />
                   <button
                      onClick={handleMaxButtonClick}
-                     className={
-                        address
-                           ? `text-sm py-1 px-2 bg-gradient-to-b from-blue-500 hover:bg-blue-900 rounded-md`
-                           : `text-sm py-1 px-2 bg-gray-700  rounded-md cursor-not-allowed`
-                     }
-                     // className="text-sm p-1 bg-blue-700 hover:bg-blue-600 rounded-md"
+                     // className={
+                     //    address
+                     //       ? `text-sm py-1 px-2 bg-gradient-to-b from-blue-500 hover:bg-blue-900 rounded-md`
+                     //       : `text-sm py-1 px-2 bg-gray-700  rounded-md cursor-not-allowed`
+                     // }
+                     className="text-sm py-1 px-2 bg-gradient-to-b from-blue-500 hover:bg-blue-900 rounded-md"
                   >
                      MAX
                   </button>
