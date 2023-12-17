@@ -13,7 +13,8 @@ export const StakingContext = createContext({});
 
 export const StakingContextProvider = ({ children }) => {
    // const stakingContractAddress = '0xE2113ac80Dde5248E771053FD3c031250E87d777';
-   const stakingContractAddress = '0x7350dfDdFF2227ba903f8260197E66dBf7939e76';
+   // const stakingContractAddress = '0x7350dfDdFF2227ba903f8260197E66dBf7939e76';
+   const stakingContractAddress = '0xedB8bd7a1866Ac01EDe01CEA7712EBF957a0a9c3';
    // const approveContractAddress = '0x97Df9831BEA07703F72287A90C163726315eB1Fd';
 
    const { address, isConnected } = useAccount();
