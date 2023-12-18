@@ -89,6 +89,7 @@ export const StakingContextProvider = ({ children }) => {
          const getApproveContractAddress = await getContract();
 
          const approveContractAddress = await getApproveContractAddress.TOKEN();
+         onsole.log(approveContractAddress);
 
          const contractInstance = new ethers.Contract(
             approveContractAddress,
@@ -395,7 +396,7 @@ export const StakingContextProvider = ({ children }) => {
          const instanceContract = getContract();
 
          const contractInstance = new ethers.Contract(
-            '0xcff4DC410aAF567831d27Cb168010174f0E58a5F',
+            '0xba0161322A09AbE48F06cE5656c1b66bFB01BE56',
             approveAbi,
             signer
          );
