@@ -88,10 +88,11 @@ export const StakingContextProvider = ({ children }) => {
 
          const getApproveContractAddress = await getContract();
 
-         const approveContractAddress = await getApproveContractAddress.TOKEN();
+         // const approveContractAddress = await getApproveContractAddress.TOKEN();
+         // console.log(approveContractAddress);
 
          const contractInstance = new ethers.Contract(
-            approveContractAddress,
+            '0xba0161322A09AbE48F06cE5656c1b66bFB01BE56',
             approveAbi,
             signer
          );
@@ -175,10 +176,15 @@ export const StakingContextProvider = ({ children }) => {
 
             // referral rewards
             const maxReward = await contractInstance.calculateRewards(address);
+            const userData = await contractInstance.userData(address);
 
             const reward = ethers.utils.formatUnits(maxReward, 'ether');
-            const calculateReward = Number(reward).toFixed(5);
-            console.log(calculateReward);
+            let calculateReward = Number(reward).toFixed(5);
+            // console.log(calculateReward);
+
+            if (userData.tokenQuantity == 0) {
+               calculateReward = 0;
+            }
 
             setCalulateReward(calculateReward);
          } catch (error) {
@@ -192,8 +198,8 @@ export const StakingContextProvider = ({ children }) => {
    // useEffect((
    //    const totalStake = async
    // ))
-
    ///// UNSTAKE F(x) ///////////
+
    const UnStake = async () => {
       // const contract = new ethers.Contract(
       //    stakingContractAddress,
@@ -403,12 +409,12 @@ export const StakingContextProvider = ({ children }) => {
 
          // Convert the input stakeAmount to Ether
          const _amount = ethers.utils.parseEther(stakeAmount, 'ether');
-         console.log(_amount);
+         // console.log(_amount);
          const amountToString = _amount.toString();
 
-         console.log(amountToString);
+         // console.log(amountToString);
 
-         console.log(amountToString);
+         // console.log(amountToString);
          //100000000000000000000
          let tx;
 
