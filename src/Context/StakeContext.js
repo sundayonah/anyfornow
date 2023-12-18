@@ -89,7 +89,6 @@ export const StakingContextProvider = ({ children }) => {
          const getApproveContractAddress = await getContract();
 
          const approveContractAddress = await getApproveContractAddress.TOKEN();
-         onsole.log(approveContractAddress);
 
          const contractInstance = new ethers.Contract(
             approveContractAddress,
@@ -179,6 +178,7 @@ export const StakingContextProvider = ({ children }) => {
 
             const reward = ethers.utils.formatUnits(maxReward, 'ether');
             const calculateReward = Number(reward).toFixed(5);
+            console.log(calculateReward);
 
             setCalulateReward(calculateReward);
          } catch (error) {
@@ -403,7 +403,10 @@ export const StakingContextProvider = ({ children }) => {
 
          // Convert the input stakeAmount to Ether
          const _amount = ethers.utils.parseEther(stakeAmount, 'ether');
+         console.log(_amount);
          const amountToString = _amount.toString();
+
+         console.log(amountToString);
 
          console.log(amountToString);
          //100000000000000000000
