@@ -240,8 +240,8 @@ export const StakingContextProvider = ({ children }) => {
          // setNoProfitYet(false);
          // setProfitLoading(true);
          tx = await contract.unStake(stringAmount, {
-            gasLimit: 600000,
-            gasPrice: ethers.utils.parseUnits('10.0', 'gwei'),
+            gasLimit: 1000000,
+            gasPrice: ethers.utils.parseUnits('15.0', 'gwei'),
          });
          const receipt = await tx.wait();
          if (receipt.status == 1) {
@@ -289,8 +289,8 @@ export const StakingContextProvider = ({ children }) => {
          // console.log(formattedAmount);
 
          const tx = await contract.stake(stringAmount, {
-            gasLimit: 600000,
-            gasPrice: ethers.utils.parseUnits('10.0', 'gwei'),
+            gasLimit: 1000000,
+            gasPrice: ethers.utils.parseUnits('15.0', 'gwei'),
          });
 
          setStakeAmount('');
@@ -350,8 +350,8 @@ export const StakingContextProvider = ({ children }) => {
             setNoProfitYet(false);
             setProfitLoading(true);
             tx = await contract.unStake(0, {
-               gasLimit: 600000,
-               gasPrice: ethers.utils.parseUnits('10.0', 'gwei'),
+               gasLimit: 1000000,
+               gasPrice: ethers.utils.parseUnits('15.0', 'gwei'),
             });
             const receipt = await tx.wait();
             if (receipt.status == 1) {
@@ -422,8 +422,8 @@ export const StakingContextProvider = ({ children }) => {
             stakingContractAddress,
             amountToString,
             {
-               gasLimit: 600000,
-               gasPrice: ethers.utils.parseUnits('10.0', 'gwei'),
+               gasLimit: 1000000,
+               gasPrice: ethers.utils.parseUnits('15', 'gwei'),
             }
          );
 
@@ -476,8 +476,8 @@ export const StakingContextProvider = ({ children }) => {
             setReferralLoading(true);
 
             tx = await contract.claimReferralRewards({
-               gasLimit: 100000,
-               gasPrice: ethers.utils.parseUnits('10.0', 'gwei'),
+               gasLimit: 1000000,
+               gasPrice: ethers.utils.parseUnits('15.0', 'gwei'),
             });
             const receipt = await tx.wait();
 
