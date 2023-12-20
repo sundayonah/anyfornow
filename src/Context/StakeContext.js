@@ -451,14 +451,25 @@ export const StakingContextProvider = ({ children }) => {
          // console.log(_amount);
          const amountToString = _amount.toString();
 
+         // estimatesGas//////////
+
+         // Estimate gas for the approve function
+         const estimatedGas = await contractInstance.estimateGas.approve(
+            stakingContractAddress,
+            amountToString
+         );
+         /////////////
+
+         // console.log(estimatedGas.toString());
+
          let tx;
 
          tx = await contractInstance.approve(
             stakingContractAddress,
             amountToString,
             {
-               gasLimit: 2000000,
-               gasPrice: ethers.utils.parseUnits('15', 'gwei'),
+               gasLimit: estimatedGas,
+               // gasPrice: ethers.utils.parseUnits('15', 'gwei'),
             }
          );
 

@@ -21,6 +21,7 @@ const MainPage = () => {
       ethBalance,
       unStakeLoading,
       claimLoading,
+      approvedLoading,
    } = useContext(StakingContext);
 
    const { address } = useAccount();
