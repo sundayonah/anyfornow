@@ -12,6 +12,7 @@ import toast, { Toaster } from 'react-hot-toast';
 export const StakingContext = createContext({});
 
 export const StakingContextProvider = ({ children }) => {
+   // testnet
    // const stakingContractAddress = '0x7350dfDdFF2227ba903f8260197E66dBf7939e76';
 
    // mainnet
@@ -266,7 +267,7 @@ export const StakingContextProvider = ({ children }) => {
          // setNoProfitYet(false);
          // setProfitLoading(true);
          tx = await contract.unStake(stringAmount, {
-            gasLimit: 5000000,
+            gasLimit: 2000000,
             gasPrice: ethers.utils.parseUnits('15.0', 'gwei'),
          });
          const receipt = await tx.wait();
@@ -324,7 +325,7 @@ export const StakingContextProvider = ({ children }) => {
          // console.log(formattedAmount);
 
          const tx = await contract.stake(stringAmount, {
-            gasLimit: 5000000,
+            gasLimit: 2000000,
             gasPrice: ethers.utils.parseUnits('15.0', 'gwei'),
          });
 
@@ -410,7 +411,8 @@ export const StakingContextProvider = ({ children }) => {
    };
    ///// APPROVE F(x) ///////////
    const Approved = async () => {
-      // setIsLoading(true);
+      // console.log('hello approve');
+      setApprovedLoading(true);
       // setLessAmount(false);
 
       if (address === undefined) {
@@ -449,17 +451,13 @@ export const StakingContextProvider = ({ children }) => {
          // console.log(_amount);
          const amountToString = _amount.toString();
 
-         // console.log(amountToString);
-
-         // console.log(amountToString);
-         //100000000000000000000
          let tx;
 
          tx = await contractInstance.approve(
             stakingContractAddress,
             amountToString,
             {
-               gasLimit: 5000000,
+               gasLimit: 2000000,
                gasPrice: ethers.utils.parseUnits('15', 'gwei'),
             }
          );
