@@ -320,13 +320,20 @@ export const StakingContextProvider = ({ children }) => {
 
          const stringAmount = _amount.toString();
 
-         // // Convert back to Ether format for logging or displaying
-         // const formattedAmount = ethers.utils.formatEther(_amount);
-         // console.log(formattedAmount);
+         // console.log(stringAmount);
+         // console.log(_amount);
+         // estimatesGas//////////
+
+         // Estimate gas for the approve function
+         // const estimatedGas1 = await contract.estimateGas.stake(_amount);
+         const estimatedGas1 = await provider.estimateGas(_amount);
+         /////////////
+
+         // console.log(estimatedGas1.toString());
 
          const tx = await contract.stake(stringAmount, {
-            gasLimit: 2000000,
-            gasPrice: ethers.utils.parseUnits('15.0', 'gwei'),
+            gasLimit: estimatedGas1,
+            // gasPrice: ethers.utils.parseUnits('15.0', 'gwei'),
          });
 
          setStakeAmount('');
