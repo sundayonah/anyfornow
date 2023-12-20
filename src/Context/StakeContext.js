@@ -134,7 +134,6 @@ export const StakingContextProvider = ({ children }) => {
 
             const approveContractAddress =
                await contractInstanceApprove.TOKEN();
-            console.log(approveContractAddress);
 
             const contractInstance = new ethers.Contract(
                approveContractAddress,
@@ -168,6 +167,9 @@ export const StakingContextProvider = ({ children }) => {
          try {
             // const contractInstance = await getContract();
 
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+
             const contractInstance = new ethers.Contract(
                stakingContractAddress,
                stakingAbi,
@@ -178,6 +180,8 @@ export const StakingContextProvider = ({ children }) => {
             const max = await contractInstance.totalStaker();
             const totalStake = max.toString();
             setTotalStaker(totalStake);
+
+            console.log(totalStaker);
 
             // total staking
             const totalAmountStake = await contractInstance.totalStaking();
@@ -209,7 +213,7 @@ export const StakingContextProvider = ({ children }) => {
       };
 
       viewFunction();
-   }, [address]);
+   }, [address, totalStaker]);
 
    // useEffect((
    //    const totalStake = async
@@ -217,6 +221,9 @@ export const StakingContextProvider = ({ children }) => {
    ///// UNSTAKE F(x) ///////////
 
    const UnStake = async () => {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+
       const contract = new ethers.Contract(
          stakingContractAddress,
          stakingAbi,
@@ -284,6 +291,9 @@ export const StakingContextProvider = ({ children }) => {
       try {
          // const contract = await getContract();
 
+         const provider = new ethers.providers.Web3Provider(window.ethereum);
+         const signer = provider.getSigner();
+
          const contract = new ethers.Contract(
             stakingContractAddress,
             stakingAbi,
@@ -336,6 +346,8 @@ export const StakingContextProvider = ({ children }) => {
 
    ///// CLAIM F(x) ///////////
    const Claim = async () => {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
       const contract = new ethers.Contract(
          stakingContractAddress,
          stakingAbi,
@@ -421,7 +433,7 @@ export const StakingContextProvider = ({ children }) => {
          const provider = new ethers.providers.Web3Provider(window.ethereum);
          const signer = provider.getSigner();
 
-         const instanceContract = getContract();
+         // const instanceContract = getContract();
 
          const contractInstance = new ethers.Contract(
             '0xba0161322A09AbE48F06cE5656c1b66bFB01BE56',
@@ -481,6 +493,8 @@ export const StakingContextProvider = ({ children }) => {
       setNoReferralYet(false);
 
       try {
+         const provider = new ethers.providers.Web3Provider(window.ethereum);
+         const signer = provider.getSigner();
          const contract = new ethers.Contract(
             stakingContractAddress,
             stakingAbi,
