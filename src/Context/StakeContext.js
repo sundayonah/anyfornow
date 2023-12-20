@@ -166,7 +166,13 @@ export const StakingContextProvider = ({ children }) => {
    useEffect(() => {
       const viewFunction = async () => {
          try {
-            const contractInstance = await getContract();
+            // const contractInstance = await getContract();
+
+            const contractInstance = new ethers.Contract(
+               stakingContractAddress,
+               stakingAbi,
+               signer
+            );
 
             // total staking
             const max = await contractInstance.totalStaker();
@@ -203,7 +209,7 @@ export const StakingContextProvider = ({ children }) => {
       };
 
       viewFunction();
-   }, [address]);
+   }, [address, signer]);
 
    // useEffect((
    //    const totalStake = async
@@ -211,13 +217,13 @@ export const StakingContextProvider = ({ children }) => {
    ///// UNSTAKE F(x) ///////////
 
    const UnStake = async () => {
-      // const contract = new ethers.Contract(
-      //    stakingContractAddress,
-      //    stakingAbi,
-      //    signer
-      // );
+      const contract = new ethers.Contract(
+         stakingContractAddress,
+         stakingAbi,
+         signer
+      );
 
-      const contract = await getContract();
+      // const contract = await getContract();
 
       if (address === undefined) {
          toast.success(`Please Connect Your Wallet.`, {
@@ -276,7 +282,13 @@ export const StakingContextProvider = ({ children }) => {
    const Stake = async () => {
       setStakeLoading(true);
       try {
-         const contract = await getContract();
+         // const contract = await getContract();
+
+         const contract = new ethers.Contract(
+            stakingContractAddress,
+            stakingAbi,
+            signer
+         );
 
          if (address === undefined) {
             toast.success(`Please Connect Your Wallet.`, {
@@ -324,13 +336,13 @@ export const StakingContextProvider = ({ children }) => {
 
    ///// CLAIM F(x) ///////////
    const Claim = async () => {
-      // const contract = new ethers.Contract(
-      //    stakingContractAddress,
-      //    stakingAbi,
-      //    signer
-      // );
+      const contract = new ethers.Contract(
+         stakingContractAddress,
+         stakingAbi,
+         signer
+      );
 
-      const contract = await getContract();
+      // const contract = await getContract();
 
       if (address === undefined) {
          toast.success(`Please Connect Your Wallet.`, {
