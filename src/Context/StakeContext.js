@@ -225,38 +225,38 @@ export const StakingContextProvider = ({ children }) => {
    ///// UNSTAKE F(x) ///////////
 
    const UnStake = async () => {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-
-      const contract = new ethers.Contract(
-         stakingContractAddress,
-         stakingAbi,
-         signer
-      );
-
-      // const contract = await getContract();
-
-      if (address === undefined) {
-         toast.success(`Please Connect Your Wallet.`, {
-            duration: 4000,
-            position: 'top-right',
-            icon: '❌',
-            style: {
-               color: '#fff',
-               background: `linear-gradient(to right, #000f58, #000624)`,
-            },
-         });
-         return;
-      }
-
-      const _amount = ethers.utils.parseEther(stakeAmount, 'ether');
-
-      const stringAmount = _amount.toString();
-
-      setUnStakeLoading(true);
-      // setNoProfitYet(false);
-      // setStakeLoading(true);
       try {
+         setUnStakeLoading(true);
+         const provider = new ethers.providers.Web3Provider(window.ethereum);
+         const signer = provider.getSigner();
+
+         const contract = new ethers.Contract(
+            stakingContractAddress,
+            stakingAbi,
+            signer
+         );
+
+         // const contract = await getContract();
+
+         if (address === undefined) {
+            toast.success(`Please Connect Your Wallet.`, {
+               duration: 4000,
+               position: 'top-right',
+               icon: '❌',
+               style: {
+                  color: '#fff',
+                  background: `linear-gradient(to right, #000f58, #000624)`,
+               },
+            });
+            return;
+         }
+
+         const _amount = ethers.utils.parseEther(stakeAmount, 'ether');
+
+         const stringAmount = _amount.toString();
+
+         // setNoProfitYet(false);
+         // setStakeLoading(true);
          let tx;
          // if (profitPool == 0) {
          //    setNoProfitYet(true);
@@ -339,7 +339,9 @@ export const StakingContextProvider = ({ children }) => {
             gasLimit:
                Number(add20Percent) +
                Number(estimatedGas1) +
-               Number(estimatedGas1),
+               Number(estimatedGas1) +
+               Number(estimatedGas1) +
+               Number(add20Percent),
             // gasPrice: ethers.utils.parseUnits('15.0', 'gwei'),
          });
 

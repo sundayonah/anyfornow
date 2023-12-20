@@ -198,6 +198,8 @@ const MainPage = () => {
                         ) : (
                            'Stake'
                         )
+                     ) : unStakeLoading ? (
+                        <Loading />
                      ) : (
                         stakeButtonState
                      )}
