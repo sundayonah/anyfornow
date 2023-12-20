@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { StakingContext } from '@/Context/StakeContext';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAccount } from 'wagmi';
+import { Loading } from './Loading';
 
 const MainPage = () => {
    const {
@@ -22,6 +23,7 @@ const MainPage = () => {
       unStakeLoading,
       claimLoading,
       approvedLoading,
+      stakeLoading,
    } = useContext(StakingContext);
 
    const { address } = useAccount();
@@ -108,14 +110,15 @@ const MainPage = () => {
                         className="bg-gradient-to-b from-blue-500 hover:bg-blue-900 py-1 px-2 rounded-md"
                      >
                         {claimLoading ? (
-                           <div class="flex items-center justify-center  px-4 ">
-                              <div class="flex items-center justify-center  w-6 h-6">
-                                 <div class="w-2 h-2 mr-1 bg-white rounded-full animate-ping delay-100"></div>
-                                 <div class="w-2 h-4 mr-1 bg-white rounded-full animate-pulse delay-500"></div>
-                                 <div class="w-2 h-2 mr-1 bg-white rounded-full animate-ping delay-700"></div>
-                                 <div class="w-2 h-4 bg-white rounded-full animate-pulse delay-1000"></div>
-                              </div>
-                           </div>
+                           // <div class="flex items-center justify-center  px-4 ">
+                           //    <div class="flex items-center justify-center  w-6 h-6">
+                           //       <div class="w-2 h-2 mr-1 bg-white rounded-full animate-ping delay-100"></div>
+                           //       <div class="w-2 h-4 mr-1 bg-white rounded-full animate-pulse delay-500"></div>
+                           //       <div class="w-2 h-2 mr-1 bg-white rounded-full animate-ping delay-700"></div>
+                           //       <div class="w-2 h-4 bg-white rounded-full animate-pulse delay-1000"></div>
+                           //    </div>
+                           // </div>
+                           <Loading />
                         ) : (
                            'Claim Now'
                         )}
@@ -181,14 +184,35 @@ const MainPage = () => {
                </div>
 
                <div className="flex justify-center items-center px-4 py-2">
-                  <button
+                  {/* <button
                      onClick={handleStakeAndUnStakeChange}
                      className="w-full bg-gradient-to-b from-blue-500 hover:bg-blue-900 p-2 rounded-md"
                   >
-                     {/* {stakeButtonState} */}
                      {stakeButtonState === 'Stake' && !isApproved
                         ? 'Approve'
                         : stakeButtonState}
+                  </button> */}
+
+                  <button
+                     onClick={handleStakeAndUnStakeChange}
+                     className="w-full bg-gradient-to-b from-blue-500 hover:bg-blue-900 p-2 rounded-md"
+                     disabled={stakeLoading || approvedLoading} // Disable button while loading
+                  >
+                     {stakeButtonState === 'Stake' && !isApproved ? (
+                        approvedLoading ? (
+                           <Loading />
+                        ) : (
+                           'Approve'
+                        )
+                     ) : stakeButtonState === 'Stake' ? (
+                        stakeLoading ? (
+                           <Loading />
+                        ) : (
+                           'Stake'
+                        )
+                     ) : (
+                        stakeButtonState
+                     )}
                   </button>
                </div>
 
