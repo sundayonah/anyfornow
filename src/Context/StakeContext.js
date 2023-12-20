@@ -12,8 +12,9 @@ import toast, { Toaster } from 'react-hot-toast';
 export const StakingContext = createContext({});
 
 export const StakingContextProvider = ({ children }) => {
-   // const stakingContractAddress = '0xE2113ac80Dde5248E771053FD3c031250E87d777';
    // const stakingContractAddress = '0x7350dfDdFF2227ba903f8260197E66dBf7939e76';
+
+   // mainnet
    const stakingContractAddress = '0xedB8bd7a1866Ac01EDe01CEA7712EBF957a0a9c3';
 
    const { address, isConnected } = useAccount();
@@ -87,11 +88,12 @@ export const StakingContextProvider = ({ children }) => {
 
          const getApproveContractAddress = await getContract();
 
-         // const approveContractAddress = await getApproveContractAddress.TOKEN();
+         const approveContractAddress = await getApproveContractAddress.TOKEN();
          // console.log(approveContractAddress);
 
          const contractInstance = new ethers.Contract(
-            '0xba0161322A09AbE48F06cE5656c1b66bFB01BE56',
+            // '0xba0161322A09AbE48F06cE5656c1b66bFB01BE56',
+            approveContractAddress,
             approveAbi,
             signer
          );
@@ -146,6 +148,7 @@ export const StakingContextProvider = ({ children }) => {
             const stringBalance = ethers.utils.formatEther(balance.toString());
 
             const formattedBalance = parseFloat(stringBalance).toFixed(3);
+            console.log(formattedBalance);
             setWalletBalance(formattedBalance);
 
             // getting eth balance
@@ -181,7 +184,7 @@ export const StakingContextProvider = ({ children }) => {
             const totalStake = max.toString();
             setTotalStaker(totalStake);
 
-            console.log(totalStaker);
+            // console.log(totalStaker);
 
             // total staking
             const totalAmountStake = await contractInstance.totalStaking();
@@ -263,7 +266,7 @@ export const StakingContextProvider = ({ children }) => {
          // setNoProfitYet(false);
          // setProfitLoading(true);
          tx = await contract.unStake(stringAmount, {
-            gasLimit: 1000000,
+            gasLimit: 5000000,
             gasPrice: ethers.utils.parseUnits('15.0', 'gwei'),
          });
          const receipt = await tx.wait();
@@ -321,7 +324,7 @@ export const StakingContextProvider = ({ children }) => {
          // console.log(formattedAmount);
 
          const tx = await contract.stake(stringAmount, {
-            gasLimit: 1000000,
+            gasLimit: 5000000,
             gasPrice: ethers.utils.parseUnits('15.0', 'gwei'),
          });
 
@@ -456,7 +459,7 @@ export const StakingContextProvider = ({ children }) => {
             stakingContractAddress,
             amountToString,
             {
-               gasLimit: 1000000,
+               gasLimit: 5000000,
                gasPrice: ethers.utils.parseUnits('15', 'gwei'),
             }
          );
