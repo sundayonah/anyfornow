@@ -327,12 +327,13 @@ export const StakingContextProvider = ({ children }) => {
          // Estimate gas for the approve function
          // const estimatedGas1 = await contract.estimateGas.stake(_amount);
          const estimatedGas1 = await provider.estimateGas(_amount);
+         const add20Percent = estimatedGas1 + estimatedGas1;
          /////////////
 
          // console.log(estimatedGas1.toString());
 
          const tx = await contract.stake(stringAmount, {
-            gasLimit: estimatedGas1,
+            gasLimit: add20Percent,
             // gasPrice: ethers.utils.parseUnits('15.0', 'gwei'),
          });
 

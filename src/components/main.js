@@ -109,19 +109,7 @@ const MainPage = () => {
                         onClick={() => Claim()}
                         className="bg-gradient-to-b from-blue-500 hover:bg-blue-900 py-1 px-2 rounded-md"
                      >
-                        {claimLoading ? (
-                           // <div class="flex items-center justify-center  px-4 ">
-                           //    <div class="flex items-center justify-center  w-6 h-6">
-                           //       <div class="w-2 h-2 mr-1 bg-white rounded-full animate-ping delay-100"></div>
-                           //       <div class="w-2 h-4 mr-1 bg-white rounded-full animate-pulse delay-500"></div>
-                           //       <div class="w-2 h-2 mr-1 bg-white rounded-full animate-ping delay-700"></div>
-                           //       <div class="w-2 h-4 bg-white rounded-full animate-pulse delay-1000"></div>
-                           //    </div>
-                           // </div>
-                           <Loading />
-                        ) : (
-                           'Claim Now'
-                        )}
+                        {claimLoading ? <Loading /> : 'Claim Now'}
                      </button>
                   </div>
                </div>
