@@ -130,7 +130,7 @@ export const StakingContextProvider = ({ children }) => {
             );
             ///////
 
-            const getApproveContractAddress = await getContract();
+            // const contractInstanceApprove = await getContract();
 
             const approveContractAddress =
                await contractInstanceApprove.TOKEN();
@@ -209,7 +209,7 @@ export const StakingContextProvider = ({ children }) => {
       };
 
       viewFunction();
-   }, [address, signer]);
+   }, [address]);
 
    // useEffect((
    //    const totalStake = async
