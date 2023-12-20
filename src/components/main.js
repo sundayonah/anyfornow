@@ -49,7 +49,7 @@ const MainPage = () => {
       <main className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-[80%] md:w-[75%] lg:w-[75%] m-auto my-10">
          <Toaster />
          {/* left side */}
-         <div className="w-full md:w-[80%] m-auto  ">
+         <div className="w-full md:w-[80%] m-auto">
             <span>Stats</span>
             <div className="p-9 border border-gray-600 rounded-md ">
                <h2>${totalAmountStake} MONIE</h2>
@@ -57,7 +57,6 @@ const MainPage = () => {
                <div className="flex justify-between items-center pt-5">
                   <span>
                      <h2>0.5% Daily</h2>
-
                      <span className="text-sm  text-gray-500">APR</span>
                   </span>
                   <span className="inline-block h-12 border-r border-solid border-gray-600"></span>
@@ -103,7 +102,6 @@ const MainPage = () => {
                         <span className="pl-2">{calculateReward} MONIE</span>
                         {/* <p>Research</p> */}
                      </div>
-
                      <button
                         onClick={() => Claim()}
                         className="bg-gradient-to-b from-blue-500 hover:bg-blue-900 py-1 px-2 rounded-md"
